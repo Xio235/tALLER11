@@ -58,6 +58,8 @@ int main() {
                 break;
             case 2:
                 realizarReserva(numeroHabitacion, cuartos, huespedes, reservaciones);
+                guardarHuespedes(huespedes, "C:/Users/laboratorio/Desktop/Nueva carpeta/huespedes.txt");  // Guardar después de hacer la reserva
+                guardarReservas(reservaciones, "C:/Users/laboratorio/Desktop/Nueva carpeta/reservas.txt");  // Guardar después de hacer la reserva
                 break;
             case 3:
                 buscarReservaPorCedula(&numeroReserva, huespedes, reservaciones);
@@ -66,6 +68,7 @@ int main() {
             case 4:
                 buscarReservaPorCedula(&numeroReserva, huespedes, reservaciones);
                 pagarReserva(numeroReserva, reservaciones, cuartos, costos);
+                guardarReservas(reservaciones, "C:/Users/laboratorio/Desktop/Nueva carpeta/reservas.txt");  // Guardar después de pagar la reserva
                 break;
             default:
                 break;
