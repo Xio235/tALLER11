@@ -2,6 +2,72 @@
 #include <string.h>
 #include "funciones.h"
 
+void guardarHuespedes(char huespedes[][2][40], const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo %s para escritura.\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        if (huespedes[i][0][0] != '\0') {
+            fprintf(file, "%s %s\n", huespedes[i][0], huespedes[i][1]);
+        }
+    }
+
+    fclose(file);
+}
+
+void guardarReservas(int reservas[][4], const char *filename) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo %s para escritura.\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        fprintf(file, "%d %d %d %d\n", reservas[i][0], reservas[i][1], reservas[i][2], reservas[i][3]);
+    }
+
+    fclose(file);
+}
+
+void cargarHuespedes(char huespedes[][2][40], const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo %s para lectura.\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        if (fscanf(file, "%39s %39s", huespedes[i][0], huespedes[i][1]) != 2) {
+            huespedes[i][0][0] = '\0';
+            huespedes[i][1][0] = '\0';
+        }
+    }
+
+    fclose(file);
+}
+
+void cargarReservas(int reservas[][4], const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo %s para lectura.\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (fscanf(file, "%d %d %d %d", &reservas[i][0], &reservas[i][1], &reservas[i][2], &reservas[i][3]) != 4) {
+            reservas[i][0] = -1;
+            reservas[i][1] = -1;
+            reservas[i][2] = -1;
+            reservas[i][3] = 0;
+        }
+    }
+
+    fclose(file);
+}
+
 void buscarPorTamano(int *numeroHabitacion, char cuartos[][3][40], double costos[]) {
     char dimension[40];
     int habitacionValida = 0;
@@ -153,3 +219,4 @@ void pagarReserva(int numeroReserva, int reservaciones[][4], char cuartos[][3][4
         printf("Reserva no encontrada.\n");
     }
 }
+
