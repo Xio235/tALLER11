@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "funciones2.h"
+#include "funciones.h"
 
 void buscarPorTamano(int *numeroHabitacion, char cuartos[][3][40], double costos[]) {
     char dimension[40];
