@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "funciones2.h"
+#include "funciones.h"
 
 int main() {
     char huespedes[5][2][40] = {
