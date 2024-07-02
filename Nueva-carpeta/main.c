@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "funciones.h"
+#include "funciones2.h"
 
 int main() {
     char huespedes[5][2][40] = {
@@ -37,6 +37,8 @@ int main() {
         {-1, -1, -1, 0}
     };
 
+    cargarDatos(huespedes, reservaciones); // Cargar los datos al inicio
+
     int opcion, numeroHabitacion, numeroReserva;
     do {
         printf("\nEscoja una opcion:\n1. Buscar Habitacion\n2. Realizar reserva\n3. Ver reservas\n4. Pagar Reserva\n>> ");
@@ -58,8 +60,6 @@ int main() {
                 break;
             case 2:
                 realizarReserva(numeroHabitacion, cuartos, huespedes, reservaciones);
-                guardarHuespedes(huespedes, "C:/Users/laboratorio/Desktop/Nueva carpeta/huespedes.txt");  // Guardar después de hacer la reserva
-                guardarReservas(reservaciones, "C:/Users/laboratorio/Desktop/Nueva carpeta/reservas.txt");  // Guardar después de hacer la reserva
                 break;
             case 3:
                 buscarReservaPorCedula(&numeroReserva, huespedes, reservaciones);
@@ -67,8 +67,7 @@ int main() {
                 break;
             case 4:
                 buscarReservaPorCedula(&numeroReserva, huespedes, reservaciones);
-                pagarReserva(numeroReserva, reservaciones, cuartos, costos);
-                guardarReservas(reservaciones, "C:/Users/laboratorio/Desktop/Nueva carpeta/reservas.txt");  // Guardar después de pagar la reserva
+                pagarReserva(numeroReserva, reservaciones, cuartos, costos, huespedes);
                 break;
             default:
                 break;
@@ -76,6 +75,8 @@ int main() {
         printf("Desea elegir otra opcion\n1.Si\n2.No\n>>");
         scanf("%d", &opcion);
     } while (opcion == 1);
+
+    guardarDatos(huespedes, reservaciones); // Guardar los datos al salir
 
     return 0;
 }
